@@ -9,7 +9,6 @@ export default function HeaderTabs() {
       style={{
         flexDirection: "row",
         alignSelf: "center",
-        marginTop: 20,
       }}
     >
       <HeaderButton
