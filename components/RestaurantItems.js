@@ -2,25 +2,28 @@ import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-export default function RestaurantItem() {
+export default function RestaurantItems({ restaurantsData }) {
   return (
     <TouchableOpacity style={{ marginBottom: 30 }} activeOpacity={1}>
-      <View style={{ padding: 15, marginTop: 10, backgroundColor: "white" }}>
-        <RestaurantImage />
-        <RestaurantInfo />
-      </View>
+      {restaurantsData.map((restaurant, index) => (
+        <View
+          key={index}
+          style={{ padding: 15, marginTop: 10, backgroundColor: "white" }}
+        >
+          <RestaurantImage image={restaurant.image_url} />
+          <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+        </View>
+      ))}
     </TouchableOpacity>
   );
 }
 
-const RestaurantImage = () => {
+const RestaurantImage = ({ image }) => {
   return (
     <>
       <View>
         <Image
-          source={{
-            uri: "https://portal.restomontreal.ca/zibo-brossard/logo/bigimage.jpg?v=2366",
-          }}
+          source={image}
           style={{
             width: "100%",
             height: 180,
@@ -38,7 +41,7 @@ const RestaurantImage = () => {
   );
 };
 
-const RestaurantInfo = () => {
+const RestaurantInfo = ({ name, rating }) => {
   return (
     <View
       style={{
@@ -49,9 +52,7 @@ const RestaurantInfo = () => {
       }}
     >
       <View>
-        <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-          Farmhouse Kitchen Thaï Cuisine
-        </Text>
+        <Text style={{ fontWeight: "bold", fontSize: 15 }}>{name}</Text>
         <Text style={{ color: "gray", fontSize: 13 }}>30-45 min</Text>
       </View>
       <View
@@ -63,7 +64,7 @@ const RestaurantInfo = () => {
           justifyContent: "center",
         }}
       >
-        <Text style={{ fontSize: 15, fontWeight: "bold" }}>4.5</Text>
+        <Text style={{ fontSize: 15, fontWeight: "bold" }}>{rating}</Text>
       </View>
     </View>
   );
