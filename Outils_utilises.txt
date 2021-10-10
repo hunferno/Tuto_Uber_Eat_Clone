@@ -1,9 +1,15 @@
 React Native --> avec EXPO
-    - Installer react native vector icons pour les icones --> 
+    - Installer react native vector icons pour les icones --> https://www.npmjs.com/package/react-native-vector-icons
 
 Google API (retrouver toutes les villes)
     - react native google places autocomplete --> https://www.npmjs.com/package/react-native-google-places-autocomplete?activeTab=readme
-    - obtenir une "key" via google --> https://www.npmjs.com/package/react-native-vector-icons
+    - obtenir une "key" via google --> https://console.cloud.google.com/
+    - créer un compte, ajouter une CB (sinon ca ne fonctionnera pas)
+    - aller dans API & Services (haut gauche)
+    - activer les API et Services, puis rechercher "places" et activer
+    - y aller et en haut à gauche cliquer sur identifiants
+    - créer identifiant, api key, restreindre la clé au "places"
+    - query={{ key: "laClé" }}
 
 Yelp API (obtenir des restaurant en fonction des ville)
     - obtenir une "key" via yelp --> https://www.yelp.com/developers/documentation/v3/authentication

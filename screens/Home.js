@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import BottomTabs from "../components/BottomTabs";
 import Categories from "../components/Categories";
 import HeaderTabs from "../components/HeaderTabs";
 import RestaurantItems from "../components/RestaurantItems";
@@ -36,16 +37,17 @@ const restaurants = [
 ];
 
 const YELP_API_KEY =
-  "trZNkXnI3X1i-bKccnXiRje8vXEUk8rYG6hYXxemP3VCd47JO6MZ5WcS1zMR_lXurhbZDUuPWwa0QIuY2bntKGrrES1tWxV7UVVnu0qfLr00JzQ7pGHZJcwV7UthYXYx";
+  "r_B9vOZzQH2Mr38jvulxClH-157mImnGef8qF_ak8tDXGULiJBJO4EaKMkmwBksiHB5HYGFctMiUO-f_mr6-6yVCCIxgvwprRLcSRKAIWFgBHwp9RSanjdiTxfxhYXYx";
 
 export default function Home() {
   const [restaurantsData, setRestaurantsData] = useState(restaurants);
+  const [city, setCity] = useState("SanDiego");
+  const [activeTab, setActiveTab] = useState("Delivery");
 
   // Fonction pour acceder a l'API yelp
   const getRestaurantsFromYelp = () => {
     // Adresse pour acceder à yelp API
-    const yelpURL =
-      "https://api.yelp.com/v3/businesses/search?term=restaurants&location=Paris";
+    const yelpURL = `https://api.yelp.com/v3/businesses/search?term=restaurants&location=${city}`;
 
     // Autorisation à yelp API
     const apiOptions = {
@@ -53,16 +55,21 @@ export default function Home() {
         Authorization: `Bearer ${YELP_API_KEY}`,
       },
     };
+
     return fetch(yelpURL, apiOptions)
       .then((res) => res.json())
-      .then((res) => console.log("fetch1 passé"))
-      .then((json) => setRestaurantsData(json.businesses))
-      .then((res) => console.log("fetch1 passé"));
+      .then((json) =>
+        setRestaurantsData(
+          json.businesses.filter((businness) =>
+            businness.transactions.includes(activeTab.toLowerCase())
+          )
+        )
+      );
   };
 
   useEffect(() => {
-    getRestaurantsFromYelp;
-  }, []);
+    getRestaurantsFromYelp();
+  }, [city, activeTab]);
 
   return (
     <SafeAreaView style={{ backgroundColor: "#eee", flex: 1 }}>
@@ -73,13 +80,14 @@ export default function Home() {
           padding: 15,
         }}
       >
-        <HeaderTabs />
-        <Search />
+        <HeaderTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Search setCity={setCity} />
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <Categories />
         <RestaurantItems restaurantsData={restaurantsData} />
       </ScrollView>
+      <BottomTabs />
     </SafeAreaView>
   );
 }

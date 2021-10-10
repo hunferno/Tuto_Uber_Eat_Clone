@@ -18,12 +18,12 @@ export default function RestaurantItems({ restaurantsData }) {
   );
 }
 
-const RestaurantImage = ({ image }) => {
+const RestaurantImage = (props) => {
   return (
     <>
       <View>
         <Image
-          source={image}
+          source={{ uri: props.image }}
           style={{
             width: "100%",
             height: 180,
