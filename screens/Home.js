@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, ScrollView } from "react-native";
-import BottomTabs from "../components/BottomTabs";
-import Categories from "../components/Categories";
-import HeaderTabs from "../components/HeaderTabs";
-import RestaurantItems from "../components/RestaurantItems";
-import Search from "../components/Search";
+import BottomTabs from "../components/home/BottomTabs";
+import Categories from "../components/home/Categories";
+import HeaderTabs from "../components/home/HeaderTabs";
+import RestaurantItems from "../components/home/RestaurantItems";
+import Search from "../components/home/Search";
 
 const restaurants = [
   {

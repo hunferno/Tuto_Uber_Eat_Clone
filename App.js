@@ -1,9 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Home from './screens/Home.js'
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import RestaurantDetail from "./screens/RestaurantDetail.js";
 
 export default function App() {
-  return (
-    <Home />
-  );
+  return <RestaurantDetail />;
 }
